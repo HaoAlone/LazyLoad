@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lazyLoading</title>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#container {
+		width: 1250px;
+		padding: 10px;
+		margin: 20px auto;
+	}
+	ul li{
+		display: inline-block;
+		width:400px;
+		height: 300px;
+		padding:5px;
+		border:1px solid white;
+		border-radius: 5px;
+		list-style: none;
+		margin:10px 0px;
+	}
+	img {
+		width: 400px;
+		height: 300px;
+	}
+</style>
+<body>
+<div id="container">
+	<ul>
+		<li><img src="img/loading.gif" data-src="img/0.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/1.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/2.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/3.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/4.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/5.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/6.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/7.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/8.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/9.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/0.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/1.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/2.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/3.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/4.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/5.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/6.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/7.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/8.jpg"></li>
+		<li><img src="img/loading.gif" data-src="img/9.jpg"></li>
+	</ul>
+</div>
+<script>
+	$(function(){
+		var n = 0;
+		var img = $('img');
+		var imgNum = img.length;
+		lazyload()
+		function lazyload(){
+			for(var i=n;i<imgNum;i++){
+				if(img.eq(i).offset().top<$(window).height()+$(window).scrollTop()){
+					if(img.eq(i).attr('src')=='img/loading.gif'){
+						var src = img.eq(i).attr('data-src');
+						console.log('1')
+						img.eq(i).attr('src',src);
+					}
+					n = i + 1;
+				}
+			}
+		}
+		$(window).on('scroll',function(){
+			lazyload();
+		});
+	});
+</script>
+</body>
+</html>
